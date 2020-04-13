@@ -1,5 +1,6 @@
 ﻿@model Question
 
+
 @{
     ViewData["Title"] = Model.Title;
     List<Answer> Answers = (List<Answer>)ViewData["Answers"];
@@ -21,7 +22,13 @@
         <strong>@a.Username</strong>:
         @a.Detail<br />
         <em>@a.Posted</em> Votes: @a.Upvotes
+        <a href="/QandA/EditAnswer/@a.Id">Update Answer</a>
+
     </p>
+
+
 }
 
-<p><a href="/QandA/Add/@Model.Id">Post your answer!</a></p>
+<p><a href="/QandA/AddAnswer/@Model.Id">Post your answer!</a></p>
+
+

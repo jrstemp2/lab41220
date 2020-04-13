@@ -68,7 +68,58 @@ namespace SlackOverload.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult AddAnswer(int id)
+        {
+            Question q = dal.GetQuestionById(id);
+
+
+            Answer a = new Answer();
+            
+            a.QuestionId = q.Id;
+            
+            return View(a);
+        }
+
+        [HttpPost]
+        public IActionResult AddAnswer(Answer a, int id)
+        {
+
+            //getquestionby
+            int result = dal.AddAnswer(a, id);
+            return RedirectToAction("Index");
+        }
+
+
+        //EDIT ANSWER
+        [HttpGet]
+        public IActionResult EditAnswer(int id)
+        {
+            Answer a = dal.GetAnswerById(id);
+            return View(a);
+        }
+
+        [HttpPost]
+        public IActionResult EditAnswer(Answer a)
+        {
+            int result = dal.UpdateAnswerById(a);
+            return RedirectToAction("Index");
+        }
+
+
+
         
+        public IActionResult SearchList(Search s)
+        {
+            string searchTerm = s.SearchWord;
+            
+            IEnumerable<Question> questions = dal.GetQuestionByKeyWord(searchTerm);
+
+            ViewData["Questions"] = questions;
+
+            return View(questions);
+        }
+
 
     }
 }

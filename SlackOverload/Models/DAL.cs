@@ -52,19 +52,44 @@ namespace SlackOverload.Models
             return conn.Execute(editString, q);
         }
 
-        public int AddAnswer(Answer a)
+
+
+
+        public int AddAnswer(Answer a, int id)
         {
             a.Posted = DateTime.Now;
-            //q.Status = 1; //always create status=1
-            //Question q = GetQuestionById(id);
-            
+            //q.Status = 1; //always create status=1            
             string addQuery = "INSERT INTO Answers (Username, Detail, QuestionId, Posted, UpVotes) ";
-            addQuery += "VALUES (@Username, @Detail, @Posted, @UpVotes WHERE QuestionId = @Id)";
+            addQuery += "VALUES (@Username, @Detail, @Id, @Posted, @UpVotes)";
 
             return conn.Execute(addQuery, a);
+        }
+
+
+        //update answer by id
+        //find answer by id
+        public Answer GetAnswerById(int id)
+        {
+            string queryString = "SELECT * FROM Answers WHERE Id = @id";
+            return conn.QueryFirstOrDefault<Answer>(queryString, new { id = id });
+        }
+        public int UpdateAnswerById(Answer a)
+        {
+            a.Posted = DateTime.Now;
+            string editString = "UPDATE Answers SET Username = @Username, Detail = @Detail, Upvotes = @UpVotes WHERE Id = @Id";
+            return conn.Execute(editString, a);
+        }
+
+        public IEnumerable<Question> GetQuestionByKeyWord(string searchTerm)
+        {
+            
+            string queryString = "SELECT * FROM Questions WHERE Category = @val";
+
+            IEnumerable<Question> questions = conn.Query<Question>(queryString, new { val = searchTerm});
 
 
 
+            return questions;
         }
     }
 }

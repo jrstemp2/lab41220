@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "SearchList";
+    List<Question> Questions = (List<Question>)ViewData["Questions"];
+}
+
+<h1>SearchList</h1>
+
+@foreach (Question q in Questions)
+{
+    <h3><a href="/QandA/Detail/@q.Id"> @q.Title </a></h3>
+    @if (q.Detail.Length > 100)
+    {
+        <div> @q.Detail.Substring(0, 100)...</div >
+    }
+
+    else
+    {
+        <div> @q.Detail </div >
+    }
+    @q.Username
+}

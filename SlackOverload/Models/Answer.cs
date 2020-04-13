@@ -18,6 +18,7 @@ namespace SlackOverload.Models
         public string Username { get => username; set => username = value; }
         public string Detail { get => detail; set => detail = value; }
         public int QuestionId { get => questionid; set => questionid = value; }
+        public int Questionid { get; internal set; }
         public DateTime Posted { get => posted; set => posted = value; }
         public int Upvotes { get => upvotes; set => upvotes = value; }
     }
