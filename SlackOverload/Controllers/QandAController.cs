@@ -37,7 +37,7 @@ namespace SlackOverload.Controllers
         public IActionResult Add(Question q)
         {
             int result = dal.CreateQuestion(q);
-            
+
 
             return RedirectToAction("Index");
         }
@@ -53,5 +53,22 @@ namespace SlackOverload.Controllers
 
             return View(question);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Question q = dal.GetQuestionById(id);
+            return View(q);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Question q)
+        {
+            int result = dal.UpdateQuestionById(q);
+            return RedirectToAction("Index");
+        }
+
+        
+
     }
 }
