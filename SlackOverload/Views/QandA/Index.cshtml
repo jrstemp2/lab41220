@@ -1,7 +1,8 @@
 ﻿@model Search
 @{
+    @using Microsoft.AspNetCore.Http
     ViewData["Title"] = "Index";
-    List<Question> Questions = (List<Question>)ViewData["Questions"];
+    List<Question> Questions = (List<Question>)ViewData["Questions"];   
 }
 
 <h1>Recent Questions</h1>
@@ -29,10 +30,11 @@
     }
     @q.Username
 
-    @*if (q.Username == "Admin")
+
+    if (@Context.Session.GetString("Username") == "Admin")
     {
-        <a href="/QandA/Edit/@q.Id">Edit</a>
-    }*@
+        <a href="/QandA/Edit/@q.Id"> Edit </a>
+    }
 
 }
 

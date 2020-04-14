@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SlackOverload.Models;
 
 namespace SlackOverload.Controllers
 {
@@ -16,10 +17,10 @@ namespace SlackOverload.Controllers
 
         public IActionResult Login(string username)
         {
+             
             if (username == "Admin")
             {
                 HttpContext.Session.SetString("Username", "Admin");
-                HttpContext.Session.SetInt32("UID", 12345);
                 return View();
             }
             else
@@ -31,7 +32,6 @@ namespace SlackOverload.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-
             return View();
         }
     }
