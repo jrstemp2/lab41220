@@ -71,12 +71,12 @@ namespace SlackOverload.Controllers
         [HttpGet]
         public IActionResult AddAnswer(int id)
         {
-            Question q = dal.GetQuestionById(id);
+            //Question q = dal.GetQuestionById(id);
 
 
             Answer a = new Answer();
             
-            a.QuestionId = q.Id;
+            a.QuestionId = id;
             
             return View(a);
         }

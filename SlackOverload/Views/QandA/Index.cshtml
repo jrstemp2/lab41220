@@ -7,11 +7,11 @@
 <h1>Recent Questions</h1>
 
 <form asp-controller="QandA" asp-action="SearchList" method="post">
-    
+
     @Html.LabelFor(m => m.SearchWord)
     @Html.EditorFor(m => m.SearchWord)
-    
-    <input type="submit" value="search now"/>
+
+    <input type="submit" value="search now" />
 </form>
 
 
@@ -28,6 +28,11 @@
         <div>@q.Detail</div>
     }
     @q.Username
-    <a href="/QandA/Edit/@q.Id">Edit</a>
+
+    @*if (q.Username == "Admin")
+    {
+        <a href="/QandA/Edit/@q.Id">Edit</a>
+    }*@
+
 }
 
